@@ -12,8 +12,6 @@ pub fn most_common_word(paragraph: String, banned: Vec<String>) -> String {
     let mut word_cnt = HashMap::new();
     let banned:HashSet<String> = banned.into_iter().collect();
 
-    println!("{:?}", pure);
-
     for word in words {
         if banned.contains(word) {
             continue;
