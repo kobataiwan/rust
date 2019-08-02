@@ -5,11 +5,14 @@ use std::collections::HashSet;
 use regex::Regex;
 
 pub fn most_common_word(paragraph: String, banned: Vec<String>) -> String {
+    let re = Regex::new(r"[^a-z]").unwrap();
     let lower = paragraph.to_lowercase();
-    let words = lower.split_whitespace();
+    let pure  = re.replace_all(&lower," ");
+    let words = pure.split_whitespace();
     let mut word_cnt = HashMap::new();
     let banned:HashSet<String> = banned.into_iter().collect();
-//    let re = Regex::new("[a-z]+").unwrap();
+
+    println!("{:?}", pure);
 
     for word in words {
         if banned.contains(word) {
@@ -28,7 +31,7 @@ pub fn most_common_word(paragraph: String, banned: Vec<String>) -> String {
     max_str
 }
 
-fn main() {
+pub fn run () {
     let test = String::from("this is a test string is a TEST! TeSt,");
     let test_ban = vec!["is".to_string()];
     println!("{:?}", most_common_word(test, test_ban)); 
