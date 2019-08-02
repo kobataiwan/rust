@@ -1,16 +1,20 @@
-extern crate regex;
-
 use std::collections::HashMap;
 use std::collections::HashSet;
-use regex::Regex;
 
 pub fn most_common_word(paragraph: String, banned: Vec<String>) -> String {
-    let re = Regex::new(r"[^a-z]").unwrap();
     let lower = paragraph.to_lowercase();
-    let pure  = re.replace_all(&lower," ");
-    let words = pure.split_whitespace();
     let mut word_cnt = HashMap::new();
     let banned:HashSet<String> = banned.into_iter().collect();
+    let mut pure = String::new();
+
+    for c in lower.chars() {
+        match c {
+            c if c.is_alphabetic() => pure.push_str(&c.to_string()),
+            _ => pure.push_str(" "),
+        }
+    }
+
+    let words = pure.split_whitespace();
 
     for word in words {
         if banned.contains(word) {
