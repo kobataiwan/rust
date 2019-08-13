@@ -1,3 +1,5 @@
+mod l957_prison_cells_after_n_days;
+
 fn main() {
-    println!("Hello, world!");
+    l957_prison_cells_after_n_days::run();
 }
